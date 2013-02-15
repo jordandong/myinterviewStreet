@@ -27,6 +27,45 @@ Sample Output #01:
 
 0
 */
+
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+using namespace std;
+
+void Pairs(vector<int> &data, int K, int &res){
+    int N = data.size();
+    unordered_map<int, int> mp;
+    for(int i=0; i<N; i++)
+        mp[data[i]]=1;
+    for(int i=0;i<N; i++){
+        if(mp.find(data[i]+K)!=mp.end())
+            res++;
+    }
+    
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int N = 0;
+    cin>>N;
+    int K =0;
+    cin>>K;
+    vector<int> data(N,0);
+    int  i = 0;
+    while(i<N)
+        cin>>data[i++];
+    int res = 0;
+    Pairs(data, K, res);
+    cout<<res<<endl;
+    
+    return 0;
+}
+
+
+/***********************Exceed Time Limited******************/
 #include <cmath>
 #include <cstdio>
 #include <vector>
@@ -39,7 +78,7 @@ void Pairs(vector<int> &data, int i, int j, int K, int &res){
         return;
     if(data[i]+ K==data[j]){
         res+=1;
-        Pairs(data, i+1, j-1, K, res);
+        return;
     }else{
         Pairs(data, i+1, j, K, res);
         Pairs(data, i, j-1, K, res);
@@ -65,42 +104,3 @@ int main() {
     
     return 0;
 }
-
-
-#include <cstdio>
-#include <vector>
-#include <iostream>
-#include <algorithm>
-#include <unordered_map>
-using namespace std;
-
-void Pairs(vector<int> &data, int K, int &res){
-    int N = data.size();
-    unordered_map<int, int> mp;
-    for(int i=0; i<N; i++)
-        mp[data[i]]=1;
-    for(int i=0;i<N; i++){
-        if(mp.find(data[i]+K)!=mp.end())
-            res++;
-    }
-    
-}
-
-
-int main() {
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
-    int N = 0;
-    cin>>N;
-    int K =0;
-    cin>>K;
-    vector<int> data(N,0);
-    int  i = 0;
-    while(i<N)
-        cin>>data[i++];
-    int res = 0;
-    Pairs(data, K, res);
-    cout<<res<<endl;
-    
-    return 0;
-}
-
